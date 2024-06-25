@@ -41,7 +41,7 @@ class Commander {
     required this.wins,
   });
 
-  factory Commander.fromMap(Map<String, dynamic> json){
+  factory Commander.fromMap(Map<String, dynamic> json) {
     return Commander(
       id: json['id'],
       name: json['name'],
@@ -53,17 +53,19 @@ class Commander {
       oracleText: json['card_faces'] == null ? json['oracle_text'] : null,
 
       layout: json['layout'],
-      imageUris: json['image_uris'] != null ? ImageUris.fromMap(json['image_uris']) : null,
+      imageUris: json['image_uris'] != null
+          ? ImageUris.fromMap(json['image_uris'])
+          : null,
       legalities: Legalities.fromJson(json['legalities']),
       colorIdentity: List<String>.from(json['color_identity']),
       cardFaces: json['card_faces'] != null
-          ? List<CardFace>.from(json['card_faces'].map((face) => CardFace.fromJson(face)))
+          ? List<CardFace>.from(
+              json['card_faces'].map((face) => CardFace.fromJson(face)))
           : null,
 
       //additional
       games: 0,
       wins: 0,
-
     );
   }
 
@@ -75,17 +77,18 @@ class Commander {
       'layout': layout,
       'color_identity': colorIdentity,
       'legalities': legalities.toJson(),
-      'image_uris': imageUris?.toMap(), // Assuming toMap method is defined in your ImageUris class
+      'image_uris': imageUris
+          ?.toMap(), // Assuming toMap method is defined in your ImageUris class
       'power': power,
       'toughness': toughness,
       'loyalty': loyalty,
-      'card_faces': cardFaces?.map((face) => face.toJson()).toList(), // Assuming toJson method is defined in your CardFace class
+      'card_faces': cardFaces
+          ?.map((face) => face.toJson())
+          .toList(), // Assuming toJson method is defined in your CardFace class
       'mana_cost': manaCost,
       'oracle_text': oracleText,
       'games': games,
       'wins': wins,
     };
   }
-
 }
-

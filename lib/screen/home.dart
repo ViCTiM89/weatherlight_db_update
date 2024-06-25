@@ -28,11 +28,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Commander'),
+        title: Text('Commanders found: ${commanders.length}'),
         backgroundColor: Colors.blueGrey,
         actions: [
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {
               showSearch(
                 context: context,
@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
           final typeLine = card.typeLine;
           final imageUrl = card.imageUris?.artCrop ??
               (card.cardFaces?.isNotEmpty == true
-                  ? card.cardFaces![0].imageUris?.artCrop
+                  ? card.cardFaces![0].imageUris.artCrop
                   : null);
 
           return ListTile(
@@ -71,9 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
           _sendDataToMongoDB();
         },
-        child: Icon(Icons.send),
+        child: const Icon(Icons.send),
       ),
-
     );
   }
 
@@ -97,16 +96,11 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error sending data to MongoDB')),
+        const SnackBar(content: Text('Error sending data to MongoDB')),
       );
     }
   }
-
-
 }
-
-
-
 
 class CommanderSearchDelegate extends SearchDelegate {
   final List<Commander> commanders;
@@ -117,7 +111,7 @@ class CommanderSearchDelegate extends SearchDelegate {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear),
         onPressed: () {
           query = '';
           showSuggestions(context);
@@ -129,7 +123,7 @@ class CommanderSearchDelegate extends SearchDelegate {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.arrow_back),
+      icon: const Icon(Icons.arrow_back),
       onPressed: () {
         close(context, null);
       },
@@ -161,7 +155,7 @@ class CommanderSearchDelegate extends SearchDelegate {
         final typeLine = card.typeLine;
         final imageUrl = card.imageUris?.artCrop ??
             (card.cardFaces?.isNotEmpty == true
-                ? card.cardFaces![0].imageUris?.artCrop
+                ? card.cardFaces![0].imageUris.artCrop
                 : null);
         return ListTile(
           leading: ClipRRect(

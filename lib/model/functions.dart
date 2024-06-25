@@ -7,14 +7,13 @@ String capitalizeFirstLetter(String input) {
   return input[0].toUpperCase() + input.substring(1).toLowerCase();
 }
 
-
-String printPowerOrLoyalty(String typeLine, String? power, String? toughness, String? loyalty) {
+String printPowerOrLoyalty(
+    String typeLine, String? power, String? toughness, String? loyalty) {
   if (typeLine.toLowerCase().contains('creature')) {
-    return('$power/$toughness');
+    return ('$power/$toughness');
   } else if (typeLine.toLowerCase().contains('planeswalker')) {
-    return('Loyalty: $loyalty');
+    return ('Loyalty: $loyalty');
   } else {
-    return('');
+    return ('');
   }
 }
-

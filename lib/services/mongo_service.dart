@@ -1,10 +1,9 @@
 import 'package:http/http.dart';
 
-import '../model/commander.dart';
+import 'api_key.dart';
 
 class MongoService {
-  //static const String apiUrl = 'your_mongo_api_url'; // Replace with your MongoDB API URL
-  static const apiUrl = "mongodb+srv://dbUser:\$v+vnhMjBp6&gE9@commander.ylxb6fw.mongodb.net/?retryWrites=true&w=majority";
+ static String apiUrl = apiKey;
 
   static Future<void> sendDataToMongoDB(String data) async {
     final response = await post(
@@ -21,4 +20,3 @@ class MongoService {
     }
   }
 }
-

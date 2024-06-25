@@ -15,14 +15,12 @@ class CardFace {
     required this.name,
     required this.typeLine,
     required this.imageUris,
-
     this.power,
     this.toughness,
     this.loyalty,
     this.manaCost,
     this.oracleText,
   });
-
 
   factory CardFace.fromJson(Map<String, dynamic> json) {
     return CardFace(
@@ -33,7 +31,7 @@ class CardFace {
       loyalty: json['loyalty'],
       imageUris: ImageUris.fromMap(json['image_uris']),
       manaCost: json['mana_cost'],
-      oracleText: json['oracle_text']
+      oracleText: json['oracle_text'],
     );
   }
 
@@ -44,10 +42,10 @@ class CardFace {
       'power': power,
       'toughness': toughness,
       'loyalty': loyalty,
-      'image_uris': imageUris.toMap(), // Assuming toMap method is defined in your ImageUris class
+      'image_uris': imageUris
+          .toMap(), // Assuming toMap method is defined in your ImageUris class
       'mana_cost': manaCost,
       'oracle_text': oracleText,
     };
   }
-
 }

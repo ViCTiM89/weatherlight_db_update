@@ -9,7 +9,7 @@ class ImageUris {
     required this.artCrop,
   });
 
-  factory ImageUris.fromMap(Map<String, dynamic> e){
+  factory ImageUris.fromMap(Map<String, dynamic> e) {
     return ImageUris(
       normal: e['normal'],
       large: e['large'],

@@ -96,6 +96,4 @@ class Legalities {
       'preDH': preDH,
     };
   }
-
-
 }

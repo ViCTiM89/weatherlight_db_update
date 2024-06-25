@@ -5,7 +5,7 @@ import '../model/functions.dart';
 
 class CommanderDetail extends StatelessWidget {
   final Commander commander;
-  const CommanderDetail({
+  const CommanderDetail({super.key,
     required this.commander,
   });
 
@@ -17,6 +17,7 @@ class CommanderDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(commander.name),
+        backgroundColor: Colors.blueGrey,
       ),
       body: SingleChildScrollView(
         child: Padding(
