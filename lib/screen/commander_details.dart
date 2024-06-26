@@ -188,6 +188,13 @@ class CommanderDetail extends StatelessWidget {
                     ),
                     ListTile(
                       title: Text(
+                        (commander.keyWords?.join(', ') ?? 'none'),
+                      ),
+                      subtitle: const Text("Keywords"),
+                    ),
+
+                    ListTile(
+                      title: Text(
                           "${capitalizeFirstLetter(commander.legalities.commander)} in Commander"),
                       subtitle: const Text("Legality"),
                     ),

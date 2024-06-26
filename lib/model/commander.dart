@@ -17,6 +17,7 @@ class Commander {
   final String? loyalty;
   final String? manaCost;
   final String? oracleText;
+  final List<String>? keyWords;
   //additional fields
   final int games;
   final int wins;
@@ -37,6 +38,7 @@ class Commander {
     this.cardFaces,
     this.manaCost,
     this.oracleText,
+    this.keyWords,
     //additional
     required this.games,
     required this.wins,
@@ -59,6 +61,7 @@ class Commander {
           : null,
       legalities: Legalities.fromJson(json['legalities']),
       colorIdentity: List<String>.from(json['color_identity']),
+      keyWords: List<String>.from(json['keywords']),
       cardFaces: json['card_faces'] != null
           ? List<CardFace>.from(
           json['card_faces'].map((face) => CardFace.fromJson(face)))
