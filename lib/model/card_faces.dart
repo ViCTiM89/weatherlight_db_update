@@ -4,7 +4,6 @@ class CardFace {
   final String name;
   final String typeLine;
   final ImageUris imageUris;
-
   final String? power;
   final String? toughness;
   final String? loyalty;
@@ -42,8 +41,7 @@ class CardFace {
       'power': power,
       'toughness': toughness,
       'loyalty': loyalty,
-      'image_uris': imageUris
-          .toMap(), // Assuming toMap method is defined in your ImageUris class
+      'image_uris': imageUris.toMap(),
       'mana_cost': manaCost,
       'oracle_text': oracleText,
     };

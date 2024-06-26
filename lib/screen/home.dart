@@ -22,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     fetchCards();
+    MongoService.init();
   }
 
   @override
@@ -77,7 +78,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> fetchCards() async {
-    //final response = await CardApi.fetchCards();
     final response = await CardApi.getCommanders();
     setState(() {
       commanders = response;
@@ -88,10 +88,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _sendDataToMongoDB() async {
     try {
       if (commanders.isNotEmpty) {
-        final firstCommanderName = commanders.first.name;
-        await MongoService.sendDataToMongoDB(firstCommanderName);
+        await MongoService.sendDataToMongoDB(commanders);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Data sent to MongoDB: $firstCommanderName')),
+          SnackBar(content: Text('Data sent to MongoDB')),
         );
       }
     } catch (error) {
@@ -144,7 +143,7 @@ class CommanderSearchDelegate extends SearchDelegate {
     final lowercaseQuery = query.toLowerCase();
 
     final searchResults = commanders.where((commander) =>
-        commander.name.toLowerCase().contains(lowercaseQuery) ||
+    commander.name.toLowerCase().contains(lowercaseQuery) ||
         commander.typeLine.toLowerCase().contains(lowercaseQuery));
 
     return ListView.builder(

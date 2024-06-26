@@ -87,13 +87,13 @@ class Legalities {
       'commander': commander,
       'oathbreaker': oathbreaker,
       'brawl': brawl,
-      'historicBrawl': standardBrawl,
+      'standardbrawl': standardBrawl,
       'alchemy': alchemy,
-      'pauperCommander': pauperCommander,
+      'paupercommander': pauperCommander,
       'duel': duel,
-      'oldSchool': oldSchool,
-      'preModern': preModern,
-      'preDH': preDH,
+      'oldschool': oldSchool,
+      'premodern': preModern,
+      'predh': preDH,
     };
   }
 }

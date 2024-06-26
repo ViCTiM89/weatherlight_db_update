@@ -20,6 +20,7 @@ class Commander {
   //additional fields
   final int games;
   final int wins;
+  final int draws; // Added draws field
 
   Commander({
     required this.id,
@@ -39,6 +40,7 @@ class Commander {
     //additional
     required this.games,
     required this.wins,
+    required this.draws, // Ensure draws is required in the constructor
   });
 
   factory Commander.fromMap(Map<String, dynamic> json) {
@@ -51,7 +53,6 @@ class Commander {
       loyalty: json['card_faces'] == null ? json['loyalty'] : null,
       manaCost: json['card_faces'] == null ? json['mana_cost'] : null,
       oracleText: json['card_faces'] == null ? json['oracle_text'] : null,
-
       layout: json['layout'],
       imageUris: json['image_uris'] != null
           ? ImageUris.fromMap(json['image_uris'])
@@ -60,12 +61,12 @@ class Commander {
       colorIdentity: List<String>.from(json['color_identity']),
       cardFaces: json['card_faces'] != null
           ? List<CardFace>.from(
-              json['card_faces'].map((face) => CardFace.fromJson(face)))
+          json['card_faces'].map((face) => CardFace.fromJson(face)))
           : null,
-
       //additional
       games: 0,
       wins: 0,
+      draws: 0, // Initialize draws to 0
     );
   }
 
@@ -89,6 +90,7 @@ class Commander {
       'oracle_text': oracleText,
       'games': games,
       'wins': wins,
+      'draws': draws, // Add draws to the map
     };
   }
 }
