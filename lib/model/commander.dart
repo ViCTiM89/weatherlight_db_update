@@ -82,18 +82,19 @@ class Commander {
       'color_identity': colorIdentity,
       'legalities': legalities.toJson(),
       'image_uris': imageUris
-          ?.toMap(), // Assuming toMap method is defined in your ImageUris class
+          ?.toMap(),
       'power': power,
       'toughness': toughness,
       'loyalty': loyalty,
       'card_faces': cardFaces
           ?.map((face) => face.toJson())
-          .toList(), // Assuming toJson method is defined in your CardFace class
+          .toList(),
       'mana_cost': manaCost,
       'oracle_text': oracleText,
+      'keywords': keyWords,
       'games': games,
       'wins': wins,
-      'draws': draws, // Add draws to the map
+      'draws': draws,
     };
   }
 }
