@@ -19,9 +19,6 @@ class Commander {
   final String? oracleText;
   final List<String>? keyWords;
   //additional fields
-  final int games;
-  final int wins;
-  final int draws; // Added draws field
 
   Commander({
     required this.id,
@@ -40,9 +37,6 @@ class Commander {
     this.oracleText,
     this.keyWords,
     //additional
-    required this.games,
-    required this.wins,
-    required this.draws, // Ensure draws is required in the constructor
   });
 
   factory Commander.fromMap(Map<String, dynamic> json) {
@@ -67,9 +61,6 @@ class Commander {
           json['card_faces'].map((face) => CardFace.fromJson(face)))
           : null,
       //additional
-      games: 0,
-      wins: 0,
-      draws: 0, // Initialize draws to 0
     );
   }
 
@@ -92,9 +83,6 @@ class Commander {
       'mana_cost': manaCost,
       'oracle_text': oracleText,
       'keywords': keyWords,
-      'games': games,
-      'wins': wins,
-      'draws': draws,
     };
   }
 }

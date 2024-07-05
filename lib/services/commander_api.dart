@@ -1,18 +1,17 @@
 import 'dart:convert';
-
 import 'package:http/http.dart';
-
 import '../model/commander.dart';
 
 class CardApi {
-  //static String url = 'https://api.scryfall.com/cards/search?q=zhulodok'; //exactly 1
-  //static String url = 'https://api.scryfall.com/cards/search?q=nicol+bolas+t%3Acreature'; //exactly 1 normal, 1 doublefaced
-  static String url =
-      'https://api.scryfall.com/cards/search?q=t%3Aplaneswalker'; //has_more = true
-  //static String url = 'https://api.scryfall.com/cards/search?q=type%3Aurza';
+  static String urlExactlyOneCard =
+      'https://api.scryfall.com/cards/search?q=zhulodok';
+  static String urlNormalDoubleFaced =
+      'https://api.scryfall.com/cards/search?q=nicol+bolas+t%3Acreature';
+  static String urlHasMore =
+      'https://api.scryfall.com/cards/search?q=t%3Aplaneswalker';
 
-  static Future<List<Commander>> getCommanders() async {
-    String next = url;
+  static Future<List<Commander>> getCommanders(String apiUrl) async {
+    String next = apiUrl;
     bool moreCards = false;
     final uri = Uri.parse(next);
     Response res = await get(uri);

@@ -39,16 +39,6 @@ class CommanderDetail extends StatelessWidget {
                       ),
                     ),
                     ListTile(
-                      title: Text(
-                        "${commander.wins} Wins",
-                        textAlign: TextAlign.right,
-                      ),
-                      subtitle: Text(
-                        "${commander.games} Games",
-                        textAlign: TextAlign.right,
-                      ),
-                    ),
-                    ListTile(
                       title: ClipRRect(
                         borderRadius: BorderRadius.circular(5),
                         child: Image.network(commander.imageUris?.artCrop ??
