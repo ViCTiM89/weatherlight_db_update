@@ -13,12 +13,20 @@ class MongoService {
   }
 
   static Future<void> sendDataToMongoDB(List<Commander> commanders) async {
+    List<Map<String, Object>> bulkOps = [];
+
     for (var commander in commanders) {
-      await _commanderCollection.update(
-        where.eq('id', commander.id),
-        commander.toMap(),
-        upsert: true,
-      );
+      bulkOps.add({
+        'updateOne': {
+          'filter': {'id': commander.id},
+          'update': {'\$set': commander.toMap()},
+          'upsert': true
+        }
+      });
+    }
+
+    if (bulkOps.isNotEmpty) {
+      await _commanderCollection.bulkWrite(bulkOps);
     }
   }
 }

@@ -65,7 +65,6 @@ class CommanderDetail extends StatelessWidget {
                   ],
                 ),
               ),
-
               Card(
                 child: Column(
                   children: <Widget>[
@@ -115,7 +114,9 @@ class CommanderDetail extends StatelessWidget {
                   ],
                 ),
               ),
-              //CardBack
+              /*
+              *Card Tiles for backside of the card
+              */
               Card(
                 child: hasCardFaces
                     ? Column(
@@ -169,6 +170,9 @@ class CommanderDetail extends StatelessWidget {
                       )
                     : null,
               ),
+              /*
+              * Card Tiles for Info not written on the Card
+              * */
               Card(
                 child: Column(
                   children: <Widget>[
