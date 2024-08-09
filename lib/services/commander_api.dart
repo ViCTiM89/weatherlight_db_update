@@ -9,8 +9,8 @@ class CardApi {
       'https://api.scryfall.com/cards/search?q=nicol+bolas+t%3Acreature';
   static String urlHasMore =
       'https://api.scryfall.com/cards/search?q=t%3Aplaneswalker';
-  static String urlAllCommanders =
-      'https://api.scryfall.com/cards/search?q=(game%3Apaper)+(legal%3Acommander+or+banned%3Acommander)+((t%3Alegendary+t%3Acreature)+or+(t%3Abackground)+or+(t%3Aplaneswalker+o%3Acommander)+or+(t%3Avehicle+o%3Acommander))';
+  static String urlBannedCommanders = 'https://api.scryfall.com/cards/search?q=t%3Alegendary+t%3Acreature+banned%3Acommander';
+  static String urlAllCommanders ='https://api.scryfall.com/cards/search?q=(game%3Apaper)+(legal%3Acommander+or+banned%3Acommander)+((t%3Alegendary+t%3Acreature)+or+(t%3Abackground)+or+(t%3Aplaneswalker+o%3Acommander)+or+(t%3Avehicle+o%3Acommander))';
 
   static Future<List<Commander>> getCommanders(String apiUrl) async {
     String next = apiUrl;

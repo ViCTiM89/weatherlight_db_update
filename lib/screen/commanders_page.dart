@@ -55,6 +55,7 @@ class _CommanderScreenState extends State<CommanderScreen> {
               (card.cardFaces?.isNotEmpty == true
                   ? card.cardFaces![0].imageUris.artCrop
                   : null);
+
           return ListTile(
             leading: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
@@ -71,7 +72,7 @@ class _CommanderScreenState extends State<CommanderScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          MongodbUploader.sendDataToMongoDB(context, commanders);
+          MongodbUploader.sendDataToMongoDB(context,commanders);
         },
         child: const Icon(Icons.send),
       ),
@@ -79,12 +80,15 @@ class _CommanderScreenState extends State<CommanderScreen> {
   }
 
   Future<void> fetchCards() async {
-    final response = await CardApi.getCommanders(CardApi.urlAllCommanders);
+    final response = await CardApi.getCommanders(CardApi.urlHasMore);
     setState(
-      () {
+          () {
         commanders = response;
         filteredCommanders = commanders;
       },
     );
   }
+
 }
+
+
