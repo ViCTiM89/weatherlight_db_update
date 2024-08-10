@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:weatherlight_db_update/services/commander_api.dart';
-
 import '../model/commander.dart';
 import '../services/mongo_service.dart';
 import '../utils/commander_search_delegate.dart';
@@ -17,6 +16,8 @@ class CommanderScreen extends StatefulWidget {
 class _CommanderScreenState extends State<CommanderScreen> {
   List<Commander> commanders = [];
   List<Commander> filteredCommanders = [];
+  bool isLoading = true; // Indicator for page loading
+  bool isUploading = false; // Indicator for uploading to DB
 
   TextEditingController searchController = TextEditingController();
 
@@ -45,7 +46,9 @@ class _CommanderScreenState extends State<CommanderScreen> {
           ),
         ],
       ),
-      body: ListView.builder(
+      body: isLoading // Show loading indicator when fetching data
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
         itemCount: filteredCommanders.length,
         itemBuilder: (context, index) {
           final card = filteredCommanders[index];
@@ -71,24 +74,38 @@ class _CommanderScreenState extends State<CommanderScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          MongodbUploader.sendDataToMongoDB(context,commanders);
+        onPressed: isUploading
+            ? null // Disable button when uploading
+            : () async {
+          setState(() {
+            isUploading = true;
+          });
+          await MongodbUploader.sendDataToMongoDB(context, commanders);
+          setState(() {
+            isUploading = false;
+          });
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Data uploaded successfully!')),
+          );
         },
-        child: const Icon(Icons.send),
+        child: isUploading
+            ? const CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+        )
+            : const Icon(Icons.send),
       ),
     );
   }
 
   Future<void> fetchCards() async {
-    final response = await CardApi.getCommanders(CardApi.urlCreatures);
-    setState(
-          () {
-        commanders = response;
-        filteredCommanders = commanders;
-      },
-    );
+    setState(() {
+      isLoading = true; // Start loading indicator
+    });
+    final response = await CardApi.getCommanders(CardApi.urlAllCommanders);
+    setState(() {
+      commanders = response;
+      filteredCommanders = commanders;
+      isLoading = false; // Stop loading indicator
+    });
   }
-
 }
-
-
