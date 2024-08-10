@@ -42,7 +42,7 @@ class CommanderDetail extends StatelessWidget {
                       title: ClipRRect(
                         borderRadius: BorderRadius.circular(5),
                         child: Image.network(commander.imageUris?.artCrop ??
-                            commander.cardFaces![0].imageUris.artCrop),
+                            commander.cardFaces![0].imageUris!.artCrop),
                       ),
                     ),
                     ListTile(
@@ -117,6 +117,7 @@ class CommanderDetail extends StatelessWidget {
               /*
               *Card Tiles for backside of the card
               */
+
               Card(
                 child: hasCardFaces
                     ? Column(
@@ -131,10 +132,16 @@ class CommanderDetail extends StatelessWidget {
                           ListTile(
                             title: ClipRRect(
                               borderRadius: BorderRadius.circular(5),
-                              child: Image.network(
-                                  commander.cardFaces![1].imageUris.artCrop),
+                              child: commander.cardFaces?[1].imageUris?.artCrop != null
+                                  ? Image.network(commander.cardFaces![1].imageUris!.artCrop)
+                                  : Transform(
+                                alignment: Alignment.center,
+                                transform: Matrix4.rotationZ(3.14159), // Rotate 180 degrees (π radians)
+                                child: Image.network(commander.imageUris!.artCrop),
+                              ),
                             ),
                           ),
+
                           ListTile(
                             title: Text(commander.cardFaces![1].typeLine),
                             subtitle: const Text("Type"),
@@ -153,6 +160,7 @@ class CommanderDetail extends StatelessWidget {
                       )
                     : null,
               ),
+
               Card(
                 child: hasCardFaces
                     ? Column(

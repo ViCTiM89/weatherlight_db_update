@@ -10,6 +10,10 @@ class CardApi {
   static String urlHasMore =
       'https://api.scryfall.com/cards/search?q=t%3Aplaneswalker';
   static String urlBannedCommanders = 'https://api.scryfall.com/cards/search?q=t%3Alegendary+t%3Acreature+banned%3Acommander';
+  static String urlPlaneswalkers = 'https://api.scryfall.com/cards/search?q=t%3Aplaneswalker+o%3Acommander';
+  static String urlBackgrounds = 'https://api.scryfall.com/cards/search?q=t%3Abackground';
+  static String urlVehicles = 'https://api.scryfall.com/cards/search?q=t%3Avehicle+o%3Acommander';
+  static String urlCreatures = 'https://api.scryfall.com/cards/search?q="z"+t%3Alegendary+t%3Acreature';
   static String urlAllCommanders ='https://api.scryfall.com/cards/search?q=(game%3Apaper)+(legal%3Acommander+or+banned%3Acommander)+((t%3Alegendary+t%3Acreature)+or+(t%3Abackground)+or+(t%3Aplaneswalker+o%3Acommander)+or+(t%3Avehicle+o%3Acommander))';
 
   static Future<List<Commander>> getCommanders(String apiUrl) async {
@@ -26,7 +30,7 @@ class CardApi {
           body.map((dynamic item) => Commander.fromMap(item)).toList();
 
       while (moreCards) {
-        Future.delayed(const Duration(milliseconds: 200));
+        Future.delayed(const Duration(milliseconds: 100));
         res = await get(nextUri);
         body = jsonDecode(res.body)['data'];
         next = jsonDecode(res.body)['next_page'] ?? '';

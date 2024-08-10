@@ -3,7 +3,7 @@ import 'image_uris.dart';
 class CardFace {
   final String name;
   final String typeLine;
-  final ImageUris imageUris;
+  final ImageUris? imageUris;
   final String? power;
   final String? toughness;
   final String? loyalty;
@@ -28,7 +28,9 @@ class CardFace {
       power: json['power'],
       toughness: json['toughness'],
       loyalty: json['loyalty'],
-      imageUris: ImageUris.fromMap(json['image_uris']),
+      imageUris: json['image_uris'] != null
+          ? ImageUris.fromMap(json['image_uris'])
+          : null,
       manaCost: json['mana_cost'],
       oracleText: json['oracle_text'],
     );
@@ -41,7 +43,7 @@ class CardFace {
       'power': power,
       'toughness': toughness,
       'loyalty': loyalty,
-      'image_uris': imageUris.toMap(),
+      'image_uris': imageUris?.toMap(),
       'mana_cost': manaCost,
       'oracle_text': oracleText,
     };

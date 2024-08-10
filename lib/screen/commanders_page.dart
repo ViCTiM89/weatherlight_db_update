@@ -53,7 +53,7 @@ class _CommanderScreenState extends State<CommanderScreen> {
           final typeLine = card.typeLine;
           final imageUrl = card.imageUris?.artCrop ??
               (card.cardFaces?.isNotEmpty == true
-                  ? card.cardFaces![0].imageUris.artCrop
+                  ? card.cardFaces![0].imageUris?.artCrop
                   : null);
 
           return ListTile(
@@ -80,7 +80,7 @@ class _CommanderScreenState extends State<CommanderScreen> {
   }
 
   Future<void> fetchCards() async {
-    final response = await CardApi.getCommanders(CardApi.urlHasMore);
+    final response = await CardApi.getCommanders(CardApi.urlCreatures);
     setState(
           () {
         commanders = response;

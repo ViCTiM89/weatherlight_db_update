@@ -56,7 +56,7 @@ class CommanderSearchDelegate extends SearchDelegate {
         final typeLine = card.typeLine;
         final imageUrl = card.imageUris?.artCrop ??
             (card.cardFaces?.isNotEmpty == true
-                ? card.cardFaces![0].imageUris.artCrop
+                ? card.cardFaces![0].imageUris?.artCrop
                 : null);
         return ListTile(
           leading: ClipRRect(
