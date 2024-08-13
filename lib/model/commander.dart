@@ -58,7 +58,7 @@ class Commander {
       keyWords: List<String>.from(json['keywords']),
       cardFaces: json['card_faces'] != null
           ? List<CardFace>.from(
-          json['card_faces'].map((face) => CardFace.fromJson(face)))
+              json['card_faces'].map((face) => CardFace.fromJson(face)))
           : null,
       //additional
     );
@@ -72,14 +72,11 @@ class Commander {
       'layout': layout,
       'color_identity': colorIdentity,
       'legalities': legalities.toJson(),
-      'image_uris': imageUris
-          ?.toMap(),
+      'image_uris': imageUris?.toMap(),
       'power': power,
       'toughness': toughness,
       'loyalty': loyalty,
-      'card_faces': cardFaces
-          ?.map((face) => face.toJson())
-          .toList(),
+      'card_faces': cardFaces?.map((face) => face.toJson()).toList(),
       'mana_cost': manaCost,
       'oracle_text': oracleText,
       'keywords': keyWords,

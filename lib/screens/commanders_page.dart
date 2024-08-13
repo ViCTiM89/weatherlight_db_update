@@ -49,49 +49,49 @@ class _CommanderScreenState extends State<CommanderScreen> {
       body: isLoading // Show loading indicator when fetching data
           ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
-        itemCount: filteredCommanders.length,
-        itemBuilder: (context, index) {
-          final card = filteredCommanders[index];
-          final name = card.name;
-          final typeLine = card.typeLine;
-          final imageUrl = card.imageUris?.artCrop ??
-              (card.cardFaces?.isNotEmpty == true
-                  ? card.cardFaces![0].imageUris?.artCrop
-                  : null);
+              itemCount: filteredCommanders.length,
+              itemBuilder: (context, index) {
+                final card = filteredCommanders[index];
+                final name = card.name;
+                final typeLine = card.typeLine;
+                final imageUrl = card.imageUris?.artCrop ??
+                    (card.cardFaces?.isNotEmpty == true
+                        ? card.cardFaces![0].imageUris?.artCrop
+                        : null);
 
-          return ListTile(
-            leading: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: Image.network(imageUrl!)),
-            title: Text(name),
-            subtitle: Text(typeLine),
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => CommanderDetail(
-                commander: card,
-              ),
-            )),
-          );
-        },
-      ),
+                return ListTile(
+                  leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: Image.network(imageUrl!)),
+                  title: Text(name),
+                  subtitle: Text(typeLine),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CommanderDetail(
+                      commander: card,
+                    ),
+                  )),
+                );
+              },
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: isUploading
             ? null // Disable button when uploading
             : () async {
-          setState(() {
-            isUploading = true;
-          });
-          await MongodbUploader.sendDataToMongoDB(context, commanders);
-          setState(() {
-            isUploading = false;
-          });
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Data uploaded successfully!')),
-          );
-        },
+                setState(() {
+                  isUploading = true;
+                });
+                await MongodbUploader.sendDataToMongoDB(context, commanders);
+                setState(() {
+                  isUploading = false;
+                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Data uploaded successfully!')),
+                );
+              },
         child: isUploading
             ? const CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-        )
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              )
             : const Icon(Icons.send),
       ),
     );

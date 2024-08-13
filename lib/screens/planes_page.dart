@@ -6,16 +6,16 @@ import '../utils/commander_search_delegate.dart';
 import '../utils/mognodb_uploader.dart';
 import 'commander_details.dart';
 
-class DungeonsScreen extends StatefulWidget {
-  const DungeonsScreen({super.key});
+class PlanesScreen extends StatefulWidget {
+  const PlanesScreen({super.key});
 
   @override
-  State<DungeonsScreen> createState() => _DungeonsScreenState();
+  State<PlanesScreen> createState() => _PlanesScreenState();
 }
 
-class _DungeonsScreenState extends State<DungeonsScreen> {
-  List<Commander> dungeons = [];
-  List<Commander> filteredDungeons = [];
+class _PlanesScreenState extends State<PlanesScreen> {
+  List<Commander> planes = [];
+  List<Commander> filteredPlanes = [];
   bool isLoading = true; // Indicator for page loading
   bool isUploading = false; // Indicator for uploading to DB
 
@@ -25,14 +25,14 @@ class _DungeonsScreenState extends State<DungeonsScreen> {
   void initState() {
     super.initState();
     fetchCards();
-    MongoService.init("Dungeons");
+    MongoService.init("Planes");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dungeons found: ${dungeons.length}'),
+        title: Text('Planes found: ${planes.length}'),
         backgroundColor: Colors.blueGrey,
         actions: [
           IconButton(
@@ -40,7 +40,7 @@ class _DungeonsScreenState extends State<DungeonsScreen> {
             onPressed: () {
               showSearch(
                 context: context,
-                delegate: CommanderSearchDelegate(dungeons),
+                delegate: CommanderSearchDelegate(planes),
               );
             },
           ),
@@ -49,9 +49,9 @@ class _DungeonsScreenState extends State<DungeonsScreen> {
       body: isLoading // Show loading indicator when fetching data
           ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
-              itemCount: filteredDungeons.length,
+              itemCount: filteredPlanes.length,
               itemBuilder: (context, index) {
-                final card = filteredDungeons[index];
+                final card = filteredPlanes[index];
                 final name = card.name;
                 final typeLine = card.typeLine;
                 final imageUrl = card.imageUris?.artCrop ??
@@ -80,7 +80,7 @@ class _DungeonsScreenState extends State<DungeonsScreen> {
                 setState(() {
                   isUploading = true;
                 });
-                await MongodbUploader.sendDataToMongoDB(context, dungeons);
+                await MongodbUploader.sendDataToMongoDB(context, planes);
                 setState(() {
                   isUploading = false;
                 });
@@ -101,10 +101,10 @@ class _DungeonsScreenState extends State<DungeonsScreen> {
     setState(() {
       isLoading = true; // Start loading indicator
     });
-    final response = await CardApi.getCommanders(CardApi.urlAllDungeons);
+    final response = await CardApi.getCommanders(CardApi.urlAllPlanes);
     setState(() {
-      dungeons = response;
-      filteredDungeons = dungeons;
+      planes = response;
+      filteredPlanes = planes;
       isLoading = false; // Stop loading indicator
     });
   }

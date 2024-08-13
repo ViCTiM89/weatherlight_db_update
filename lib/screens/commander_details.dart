@@ -5,7 +5,8 @@ import '../model/functions.dart';
 
 class CommanderDetail extends StatelessWidget {
   final Commander commander;
-  const CommanderDetail({super.key,
+  const CommanderDetail({
+    super.key,
     required this.commander,
   });
 
@@ -30,9 +31,7 @@ class CommanderDetail extends StatelessWidget {
                   children: <Widget>[
                     ListTile(
                       title: Text(
-                        (commander.layout == 'normal' ||
-                                commander.layout == 'meld' ||
-                                commander.layout == 'saga')
+                        (!hasCardFaces)
                             ? commander.name
                             : commander.cardFaces![0].name,
                         style: const TextStyle(fontWeight: FontWeight.bold),
@@ -46,9 +45,7 @@ class CommanderDetail extends StatelessWidget {
                       ),
                     ),
                     ListTile(
-                      title: Text((commander.layout == 'normal' ||
-                              commander.layout == 'meld' ||
-                              commander.layout == 'saga')
+                      title: Text((!hasCardFaces)
                           ? commander.typeLine
                           : commander.cardFaces![0].typeLine),
                     ),
@@ -117,7 +114,6 @@ class CommanderDetail extends StatelessWidget {
               /*
               *Card Tiles for backside of the card
               */
-
               Card(
                 child: hasCardFaces
                     ? Column(
@@ -132,16 +128,20 @@ class CommanderDetail extends StatelessWidget {
                           ListTile(
                             title: ClipRRect(
                               borderRadius: BorderRadius.circular(5),
-                              child: commander.cardFaces?[1].imageUris?.artCrop != null
-                                  ? Image.network(commander.cardFaces![1].imageUris!.artCrop)
-                                  : Transform(
-                                alignment: Alignment.center,
-                                transform: Matrix4.rotationZ(3.14159), // Rotate 180 degrees (π radians)
-                                child: Image.network(commander.imageUris!.artCrop),
-                              ),
+                              child:
+                                  commander.cardFaces?[1].imageUris?.artCrop !=
+                                          null
+                                      ? Image.network(commander
+                                          .cardFaces![1].imageUris!.artCrop)
+                                      : Transform(
+                                          alignment: Alignment.center,
+                                          transform: Matrix4.rotationZ(
+                                              3.14159), // Rotate 180 degrees (π radians)
+                                          child: Image.network(
+                                              commander.imageUris!.artCrop),
+                                        ),
                             ),
                           ),
-
                           ListTile(
                             title: Text(commander.cardFaces![1].typeLine),
                             subtitle: const Text("Type"),
@@ -160,7 +160,6 @@ class CommanderDetail extends StatelessWidget {
                       )
                     : null,
               ),
-
               Card(
                 child: hasCardFaces
                     ? Column(
@@ -194,7 +193,6 @@ class CommanderDetail extends StatelessWidget {
                       ),
                       subtitle: const Text("Keywords"),
                     ),
-
                     ListTile(
                       title: Text(
                           "${capitalizeFirstLetter(commander.legalities.commander)} in Commander"),

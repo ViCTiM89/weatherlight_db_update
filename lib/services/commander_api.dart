@@ -15,9 +15,13 @@ class CardApi {
       'https://api.scryfall.com/cards/search?q=t%3Aplaneswalker+o%3Acommander';
   static String urlCreatures =
       'https://api.scryfall.com/cards/search?q=t%3Aplaneswalker+or+t%3Avehicle';
+
   static String urlAllCommanders =
       'https://api.scryfall.com/cards/search?q=(game%3Apaper)+(legal%3Acommander+or+banned%3Acommander)+((t%3Alegendary+t%3Acreature)+or+(t%3Abackground)+or+(t%3Aplaneswalker+o%3Acommander)+or+(t%3Avehicle+o%3Acommander))';
-  static String urlAlldungeons ='https://api.scryfall.com/cards/search?q=t%3Adungeon';
+  static String urlAllDungeons =
+      'https://api.scryfall.com/cards/search?q=t%3Adungeon';
+  static String urlAllPlanes =
+      'https://api.scryfall.com/cards/search?q=t%3Aplane';
 
   // Method to fetch commanders with headers
   static Future<List<Commander>> getCommanders(String apiUrl) async {
@@ -27,8 +31,10 @@ class CardApi {
 
     // Define headers for the request
     final headers = {
-      'User-Agent': 'Weatherlight/0.7',  // Replace with your app name and version
-      'Accept': 'application/json;q=0.9,*/*;q=0.8',  // Accept header with generic preference
+      'User-Agent':
+          'Weatherlight/0.7', // Replace with your app name and version
+      'Accept':
+          'application/json;q=0.9,*/*;q=0.8', // Accept header with generic preference
     };
 
     Response res = await get(uri, headers: headers);
@@ -38,7 +44,7 @@ class CardApi {
       next = jsonDecode(res.body)['next_page'] ?? '';
       moreCards = jsonDecode(res.body)['has_more'];
       List<Commander> commanders =
-      body.map((dynamic item) => Commander.fromMap(item)).toList();
+          body.map((dynamic item) => Commander.fromMap(item)).toList();
 
       while (moreCards) {
         // Delay to avoid overwhelming the API server
