@@ -25,7 +25,7 @@ class _CommanderScreenState extends State<CommanderScreen> {
   void initState() {
     super.initState();
     fetchCards();
-    MongoService.init();
+    MongoService.init("Commanders");
   }
 
   @override

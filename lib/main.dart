@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:weatherlight_db_update/screen/home.dart';
+import 'package:weatherlight_db_update/screens/home.dart';
 
 void main() {
   runApp(const MyApp());

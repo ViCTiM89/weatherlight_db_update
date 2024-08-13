@@ -17,6 +17,7 @@ class CardApi {
       'https://api.scryfall.com/cards/search?q=t%3Aplaneswalker+or+t%3Avehicle';
   static String urlAllCommanders =
       'https://api.scryfall.com/cards/search?q=(game%3Apaper)+(legal%3Acommander+or+banned%3Acommander)+((t%3Alegendary+t%3Acreature)+or+(t%3Abackground)+or+(t%3Aplaneswalker+o%3Acommander)+or+(t%3Avehicle+o%3Acommander))';
+  static String urlAlldungeons ='https://api.scryfall.com/cards/search?q=t%3Adungeon';
 
   // Method to fetch commanders with headers
   static Future<List<Commander>> getCommanders(String apiUrl) async {

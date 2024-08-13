@@ -6,10 +6,10 @@ class MongoService {
   static late Db _db;
   static late DbCollection _commanderCollection;
 
-  static Future<void> init() async {
+  static Future<void> init(String collectionName) async {
     _db = await Db.create(apiKey);
     await _db.open();
-    _commanderCollection = _db.collection('commanders');
+    _commanderCollection = _db.collection(collectionName);
   }
 
   static Future<void> sendDataToMongoDB(List<Commander> commanders) async {

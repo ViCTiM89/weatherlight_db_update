@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../model/commander.dart';
-import '../screen/commander_details.dart';
+import '../screens/commander_details.dart';
 
 class CommanderSearchDelegate extends SearchDelegate {
   final List<Commander> cards;
@@ -43,15 +43,25 @@ class CommanderSearchDelegate extends SearchDelegate {
 
   Widget _buildSearchResults(String query) {
     final lowercaseQuery = query.toLowerCase();
+    final queryTokens = lowercaseQuery.split(' ').where((token) => token.isNotEmpty).toList();
 
-    final searchResults = cards.where((commander) =>
-    commander.name.toLowerCase().contains(lowercaseQuery) ||
-        commander.typeLine.toLowerCase().contains(lowercaseQuery));
+    // Filtering the search results based on the tokenized query
+    final searchResults = cards.where((commander) {
+      return queryTokens.every((token) {
+        final nameMatches = commander.name.toLowerCase().contains(token);
+        final typeLineMatches = commander.typeLine.toLowerCase().contains(token);
+        final keywordsMatch = commander.keyWords?.any((keyword) =>
+            keyword.toLowerCase().contains(token));
 
+        return nameMatches || typeLineMatches || keywordsMatch!;
+      });
+    }).toList();
+
+    // Building the list of results
     return ListView.builder(
       itemCount: searchResults.length,
       itemBuilder: (context, index) {
-        final card = searchResults.elementAt(index);
+        final card = searchResults[index];
         final name = card.name;
         final typeLine = card.typeLine;
         final imageUrl = card.imageUris?.artCrop ??
@@ -61,7 +71,7 @@ class CommanderSearchDelegate extends SearchDelegate {
         return ListTile(
           leading: ClipRRect(
             borderRadius: BorderRadius.circular(5),
-            child: Image.network(imageUrl!),
+            child: imageUrl != null ? Image.network(imageUrl) : null,
           ),
           title: Text(name),
           subtitle: Text(typeLine),
