@@ -1,0 +1,1 @@
+ D:\\Programmieren\\weatherlight_db_update\\.dart_tool\\flutter_build\\fb8cbc5755a5d8f0da703303de7627d3\\native_assets.yaml: 
