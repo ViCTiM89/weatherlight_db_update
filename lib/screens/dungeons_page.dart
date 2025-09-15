@@ -16,8 +16,8 @@ class DungeonsScreen extends StatefulWidget {
 class _DungeonsScreenState extends State<DungeonsScreen> {
   List<Commander> dungeons = [];
   List<Commander> filteredDungeons = [];
-  bool isLoading = true; // Indicator for page loading
-  bool isUploading = false; // Indicator for uploading to DB
+  bool isLoading = true;
+  bool isUploading = false;
 
   TextEditingController searchController = TextEditingController();
 

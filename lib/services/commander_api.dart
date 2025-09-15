@@ -17,7 +17,7 @@ class CardApi {
       'https://api.scryfall.com/cards/search?q=t%3Aplaneswalker+or+t%3Avehicle';
 
   static String urlAllCommanders =
-      'https://api.scryfall.com/cards/search?q=(game%3Apaper)+(legal%3Acommander+or+banned%3Acommander)+((t%3Alegendary+t%3Acreature)+or+(t%3Abackground)+or+(t%3Aplaneswalker+o%3Acommander)+or+(-type%3Abattle+-type%3Aland+t%3Avehicle+t%3Alegendary))';
+      'https://api.scryfall.com/cards/search?q=(game%3Apaper)+(legal%3Acommander+or+banned%3Acommander)+((t%3Alegendary+t%3Acreature)+or+(t%3Abackground)+or+(t%3Aplaneswalker+o%3Acommander)+or+(-type%3Abattle+-type%3Aland+t%3Avehicle+t%3Alegendary)+or+(t%3Aspacecraft+t%3Alegendary))';
   static String urlAllDungeons =
       'https://api.scryfall.com/cards/search?q=t%3Adungeon';
   static String urlAllPlanes =
