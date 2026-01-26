@@ -60,9 +60,9 @@ class _CommanderScreenState extends State<CommanderScreen> {
                         : null);
 
                 return ListTile(
-                  leading: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Image.network(imageUrl!)),
+                  //leading: ClipRRect(
+                  //    borderRadius: BorderRadius.circular(5),
+                  //    child: Image.network(imageUrl!)),
                   title: Text(name),
                   subtitle: Text(typeLine),
                   onTap: () => Navigator.of(context).push(MaterialPageRoute(
